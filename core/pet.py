@@ -1,5 +1,6 @@
 """nibble's state and evolution"""
 from config import STAGE_THRESHOLD
+import json
 class Nibble: 
     STAGES = ['egg', 'baby', 'child', 'teen', 'adult', 'elder']
 
@@ -49,3 +50,26 @@ class Nibble:
         else:
             explanation += " Nibble has reached the final stage."
         return explanation
+    
+    def save_state(self, filepath= "data/nibble_state.json"):
+        """save nibble's state to a file"""
+        data = {
+            'stage': self.stage,
+            'xp': self.xp,
+            'history': self.history
+        }
+        with open(filepath, 'w') as f:
+            json.dump(data, f, indent=4) 
+    
+    @classmethod
+    def load_state(cls, filepath= "data/nibble_state.json"):
+        """load nibble's state from a file"""
+        try:
+            with open(filepath, 'r') as f:
+                data = json.load(f)
+            return cls( 
+                stage=data.get('stage', 'egg'),
+                xp=data.get('xp', 0)
+            ), data.get('history', [])
+        except FileNotFoundError:
+            return cls(), []

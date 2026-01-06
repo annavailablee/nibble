@@ -1,0 +1,17 @@
+{
+    "stage": "baby",
+    "xp": 26,
+    "history": [
+        {
+            "xp_gained": 26,
+            "new_total_xp": 26,
+            "stage_before": "egg",
+            "stage_after": "baby",
+            "signals": {
+                "xp_gained": 26,
+                "fixed_error": true,
+                "long_session": true
+            }
+        }
+    ]
+}
