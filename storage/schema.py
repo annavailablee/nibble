@@ -1,0 +1,1 @@
+"""schema definitions for the nibble storage system"""

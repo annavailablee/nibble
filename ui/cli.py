@@ -1,0 +1,1 @@
+"""command-line interface for the nibble project"""
