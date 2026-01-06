@@ -6,6 +6,8 @@ def simulate_session():
     #Create pet and evaluator
     nibble = Nibble(stage='egg', xp=0)
     evaluator = Evaluator()
+    nibble, history = nibble.load_state()
+    nibble.history = history
 
     #fake session metrics
     session_metrics = {
@@ -16,6 +18,7 @@ def simulate_session():
         "lines_deleted": 10,
         "reflections_done": True
     }
+    nibble.save_state()
 
     #Evaluate session to get signals
     signals = evaluator.evaluate(session_metrics)
