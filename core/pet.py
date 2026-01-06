@@ -9,36 +9,28 @@ class Nibble:
         self.stage = stage
         self.xp = xp
         self.history = []
+    
+    def update_stage(self):
+        for stage, threshold in STAGE_THRESHOLD.items():
+            if self.xp >= threshold:
+                self.stage = stage
 
     def apply_signals(self, signals: dict):
         """update nibble's state based on external signals"""
         xp = signals.get('xp_gained', 0)
         self.xp += xp
+
+        old_stage = self.stage
+        self.update_stage()
+
         # simple history log
         self.history.append({
             'xp_gained': xp,
             'new_total_xp': self.xp,
-            'stage': self.stage,
+            'stage_before': old_stage,
+            'stage_after': self.stage,
             'signals': signals
         })
-
-    def evolve(self):
-        """checks if XP threshold met and evolves nibble to next stage"""
-        if self.stage == 'egg': 
-            if self.xp >= STAGE_THRESHOLD.get('baby', float('inf')):
-                self.stage = 'baby'
-        elif self.stage == 'baby':
-            if self.xp >= STAGE_THRESHOLD.get('child', float('inf')):
-                self.stage = 'child'
-        elif self.stage == 'child':
-            if self.xp >= STAGE_THRESHOLD.get('teen', float('inf')):
-                self.stage = 'teen'
-        elif self.stage == 'teen':
-            if self.xp >= STAGE_THRESHOLD.get('adult', float('inf')):
-                self.stage = 'adult'
-        elif self.stage == 'adult':
-            if self.xp >= STAGE_THRESHOLD.get('elder', float('inf')):
-                self.stage = 'elder'
 
     def status(self) -> dict: 
         """return nibble's current status"""
@@ -47,3 +39,13 @@ class Nibble:
             'xp': self.xp,
             'history_length': len(self.history)
         }
+    def explain_state(self) -> str:
+        """explain nibble's current state"""
+        explanation = f"Nibble is currently at stage '{self.stage}' with {self.xp} XP."
+        if self.stage != 'elder':
+            next_stage = self.STAGES[self.STAGES.index(self.stage) + 1]
+            next_threshold = STAGE_THRESHOLD.get(next_stage, 'N/A')
+            explanation += f" Needs {next_threshold - self.xp} more XP to evolve to '{next_stage}'."
+        else:
+            explanation += " Nibble has reached the final stage."
+        return explanation

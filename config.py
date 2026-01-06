@@ -8,5 +8,6 @@ STAGE_THRESHOLD = {
     'baby': 10, 
     'child': 50,
     'teen': 100,
-    'adult': 250
+    'adult': 250,
+    'elder': 350
 }
