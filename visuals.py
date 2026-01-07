@@ -1,3 +1,4 @@
+"""Visual representation of Nibble's state"""
 import tkinter as tk
 from tkinter import ttk
 from PIL import Image, ImageTk # type: ignore
@@ -20,7 +21,7 @@ def show_nibble(nibble):
 
     progress_frame = tk.Frame(main_frame)
     progress_frame.pack(pady=5)
-
+ 
 
     # image path based on stage
     img_path = os.path.join("assets", f"{nibble.stage}.png")
