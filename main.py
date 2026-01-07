@@ -1,14 +1,14 @@
 """entry point for the application"""
 from core.pet import Nibble
 from core.evaluator import Evaluator
-
+from visuals import show_nibble
 def simulate_session(): 
     #Create pet and evaluator
     nibble = Nibble(stage='baby', xp=0)
     evaluator = Evaluator()
     nibble, history = nibble.load_state()
     nibble.history = history
-
+ 
     #fake session metrics
     session_metrics = {
         "session_minutes": 30,
@@ -40,6 +40,9 @@ def simulate_session():
     explanation = nibble.explain_state()
     print("\n 🐾Nibble State Explanation: ")
     print(explanation)
-        
+
+    # Show the nibble stage visualizer
+    show_nibble(nibble)
+
 if __name__ == "__main__":
     simulate_session()
