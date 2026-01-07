@@ -1,32 +1,34 @@
 """Visual representation of Nibble's state"""
 
-from logging import root
 import tkinter as tk
 from tkinter import ttk
 from PIL import Image, ImageTk # type: ignore
 import os
 from config import STAGE_THRESHOLD
 
-def show_nibble(nibble, xp=0, next_xp=50): 
+def show_nibble(nibble, notification=None):
     root = tk.Tk()
     root.title("Nibble 🐾")
-    root.geometry("400x500")
-    
+
+    if notification:
+        notif_label = tk.Label(root, text=notification, font=("Arial", 11, "italic"), fg="#4CAF50")
+        notif_label.pack(pady=5)
+
+
     title = ttk.Label(root, text="Meet Nibble 🐾", font=("Segoe UI", 18, "bold"))
     title.pack(pady=(10,5))
 
-    image_frame = ttk.Frame(root)
-    image_frame.pack(pady=10)
-
-    stats_frame = ttk.Frame(root)
-    stats_frame.pack(pady=10)
-
-    progress_frame = ttk.Frame(root)
-    progress_frame.pack(pady=10)
-
-
     main_frame = tk.Frame(root)
-    main_frame.pack(fill="both", expand=True, padx=10, pady=10)
+    main_frame.pack(fill="both", expand=True, padx=5, pady=5)
+
+    image_frame = tk.Frame(main_frame)
+    image_frame.pack(pady=5)
+
+    stats_frame = tk.Frame(main_frame)
+    stats_frame.pack(pady=5)
+
+    progress_frame = tk.Frame(main_frame)
+    progress_frame.pack(pady=5)
 
     pet_frame = tk.Frame(main_frame)
     pet_frame.pack(pady=5)
@@ -45,6 +47,7 @@ def show_nibble(nibble, xp=0, next_xp=50):
         "adult": "#FFE8EC",
         "elder": "#EFEFEF"
     }
+
     root.configure(bg=STAGE_COLORS.get(nibble.stage, "#FFFFFF"))
 
     # image path based on stage

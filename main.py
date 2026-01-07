@@ -2,13 +2,34 @@
 from core.pet import Nibble
 from core.evaluator import Evaluator
 from visuals import show_nibble
+from core.pet import Nibble
+import time
+signals = {}
 def simulate_session(): 
     #Create pet and evaluator
-    nibble = Nibble(stage='baby', xp=0)
     evaluator = Evaluator()
-    nibble, history = nibble.load_state()
+    nibble, history = Nibble.load_state()
     nibble.history = history
- 
+    MIN_SESSION_GAP = 5 * 60  # 5 minutes
+
+    can_gain_xp = True
+
+    if hasattr(nibble, "last_active") and nibble.last_active:
+        time_since_last = time.time() - nibble.last_active
+        if time_since_last < MIN_SESSION_GAP:
+            can_gain_xp = False
+
+    BONUS_XP = 1    
+    RETURN_THRESHOLD = 60 * 60 * 6  # 6 hours
+
+    notification = None
+
+    if hasattr(nibble, "last_active") and nibble.last_active:
+        time_away = time.time() - nibble.last_active
+        if time_away > RETURN_THRESHOLD:
+            nibble.xp += BONUS_XP
+            notification = "🐾 Welcome back! Nibble gained +1 XP"
+
     #fake session metrics
     session_metrics = {
         "session_minutes": 30,
@@ -18,39 +39,41 @@ def simulate_session():
         "lines_deleted": 10,
         "reflections_done": True
     }
-    nibble.save_state()
+    
 
     #Evaluate session to get signals
-    signals = evaluator.evaluate(session_metrics)
+    if can_gain_xp:
+        signals = evaluator.evaluate(session_metrics)
+        nibble.apply_signals(signals)
+    else:
+        print("⏳ Session too short. No XP gained.")
 
-    nibble.update_stage()
+    nibble.save_state()
 
-    #Apply signals to nibble
-    nibble.apply_signals(signals)
+    stage_before = nibble.stage
+    stage_after = nibble.stage
 
-    old_stage = nibble.history[-1]["stage_before"]
-    new_stage = nibble.stage
+    if stage_before != stage_after:
+        print(f"✨ Nibble evolved into {stage_after.capitalize()}!")
 
-    if old_stage != new_stage:
-        print(f"✨ Nibble evolved into {new_stage.capitalize()}!")
 
     #Print nibble status
     print("\n 🐾Nibble Status After Session: ")
     status = nibble.status()
 
     print("\n 📜History\n")
-    for entry in nibble.history:
+    for entry in reversed(nibble.history):
         print(entry, "\n")
 
     #Explain nibble state
     explanation = nibble.explain_state()
-    print("\n 🐾Nibble State Explanation: ")
+    print("\n 🐾 Nibble State Explanation: ")
     print(explanation)
 
     # Show the nibble stage visualizer
     next_stage = nibble.get_next_stage()
-    show_nibble(nibble)
+    show_nibble(nibble, notification=notification)
 
-
+    nibble.save_state()
 if __name__ == "__main__":
     simulate_session()

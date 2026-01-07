@@ -1,4 +1,5 @@
 """Evaluator for nibble's behavior and decision making"""
+from unittest import signals
 from config import (
     XP_PER_5MINUTES,
     XP_ERROR_FIXED,
@@ -48,5 +49,9 @@ class Evaluator:
         # XP from reflections
         if metrics.get("reflections_done", False):
             signals["xp_gained"] += XP_REFLECTION
-            
+        
+        XP_MULTIPLIER = 0.3  # tune this (0.2–0.4 feels good)
+
+        signals["xp_gained"] = int(signals["xp_gained"] * XP_MULTIPLIER)
+
         return signals

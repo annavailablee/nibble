@@ -1,4 +1,5 @@
 """nibble's state and evolution"""
+import time
 from config import STAGE_THRESHOLD
 import json
 class Nibble: 
@@ -63,24 +64,35 @@ class Nibble:
         data = {
             'stage': self.stage,
             'xp': self.xp,
-            'history': self.history
+            'history': self.history,
+            "last_active": time.time(),
+            "had_activity": False
         }
         with open(filepath, 'w') as f:
             json.dump(data, f, indent=4) 
     
     @classmethod
-    def load_state(cls, filepath= "data/nibble_state.json"):
-        """load nibble's state from a file"""
+    def load_state(cls, filepath="data/nibble_state.json"):
         try:
             with open(filepath, 'r') as f:
                 data = json.load(f)
-            return cls( 
+
+            nibble = cls(
                 stage=data.get('stage', 'baby'),
                 xp=data.get('xp', 0)
-            ), data.get('history', [])
+            )
+            nibble.history = data.get('history', [])
+            nibble.last_active = data.get("last_active", None)
+            return nibble, nibble.history
+
         except FileNotFoundError:
+            print("DEBUG: No saved state found. Creating new Nibble.")
             return cls(), []
-    
+
+        except Exception as e:
+            print("DEBUG: Failed to load state:", e)
+            return cls(), []
+
     def get_stage_progress(self, stage_thresholds):
         next_stage = self.get_next_stage()
         if next_stage is None:
