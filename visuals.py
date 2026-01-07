@@ -6,10 +6,20 @@ from PIL import Image, ImageTk # type: ignore
 import os
 from config import STAGE_THRESHOLD
 
-def show_nibble(nibble): 
+def show_nibble(nibble, xp=0, next_xp=50): 
     root = tk.Tk()
     root.title("Nibble 🐾")
-    root.geometry("400x480")
+    root.geometry("400x500")
+
+    image_frame = ttk.Frame(root)
+    image_frame.pack(pady=10)
+
+    stats_frame = ttk.Frame(root)
+    stats_frame.pack(pady=10)
+
+    progress_frame = ttk.Frame(root)
+    progress_frame.pack(pady=10)
+
 
     main_frame = tk.Frame(root)
     main_frame.pack(fill="both", expand=True, padx=10, pady=10)
@@ -25,20 +35,24 @@ def show_nibble(nibble):
  
 
     # image path based on stage
-    img_path = os.path.join("assets", f"{nibble.stage}.png")
-    img = Image.open(img_path)
-    img = img.resize((300, 300), Image.Resampling.LANCZOS)
-    tk_img = ImageTk.PhotoImage(img)
+    img = Image.open(f"assets/{nibble.stage}.png")
+    img = img.resize((200, 200), Image.Resampling.LANCZOS)
+    photo = ImageTk.PhotoImage(img)
 
-    img_label = tk.Label(pet_frame, image=tk_img)
-    img_label.image = tk_img
-    img_label.pack(pady=10)
+    img_label = ttk.Label(image_frame, image=photo)
+    img_label.image = photo
+    img_label.pack()
+
     # stats
-    stage_label = tk.Label(stats_frame, text=f"Stage: {nibble.stage.capitalize()}", font=("Arial", 16, "bold"))
+    """stage_label = tk.Label(stats_frame, text=f"Stage: {nibble.stage.capitalize()}", font=("Arial", 16, "bold"))
     stage_label.pack(pady=10)
 
     xp_label = tk.Label(stats_frame, text=f"XP: {nibble.xp}", font=("Arial", 14))
-    xp_label.pack(pady=5)
+    xp_label.pack(pady=5)"""
+
+    ttk.Label(stats_frame, text=f"Stage: {nibble.stage}", font=("Segoe UI", 14)).pack()
+    ttk.Label(stats_frame, text=f"XP: {nibble.xp}", font=("Segoe UI", 12)).pack()
+
 
     if nibble.stage != "elder":
         stages = list(STAGE_THRESHOLD.keys())
@@ -52,14 +66,10 @@ def show_nibble(nibble):
 
     history_label = tk.Label(root, text=f"Sessions logged: {len(nibble.history)}", font=("Arial", 12))
     history_label.pack(pady=10)
+    # Progress bar
+    progress_label = tk.Label(progress_frame, text="Progress loading...", font=("Arial", 11), fg="gray")
+    progress_label.pack()
 
-    progress_label = tk.Label(progress_frame, text="Progress loading...", font=("Arial", 12), fg="gray")
-    if nibble.stage != "elder":
-        next_stage = list(STAGE_THRESHOLD.keys())[list(STAGE_THRESHOLD.keys()).index(nibble.stage) + 1]
-        xp_needed = STAGE_THRESHOLD[next_stage] - nibble.xp
-        progress_text = f"{xp_needed} XP to reach {next_stage.capitalize()}"
-    else:
-        progress_text = "Final stage reached 🌟"
 
     if nibble.stage != "elder":
         stages = list(STAGE_THRESHOLD.keys())
@@ -70,19 +80,19 @@ def show_nibble(nibble):
         current_threshold = STAGE_THRESHOLD[current_stage]
         next_threshold = STAGE_THRESHOLD[next_stage]
 
+        xp_needed = max(0, next_threshold - current_xp)
+        progress_text = f"{xp_needed} XP to reach {next_stage.capitalize()}"
+        # Progress within this stage (0–100)
         progress_value = (current_xp - current_threshold) / (next_threshold - current_threshold)
-        progress_value = max(0, min(progress_value, 1)) * 100  # clamp 0–100
+        progress_value = max(0, min(progress_value, 1)) * 100
 
-        progress_bar = ttk.Progressbar(
-            progress_frame,
-            orient="horizontal",
-            length=200,
-            mode="determinate"
-        )
+        progress_bar = ttk.Progressbar(progress_frame, orient="horizontal", length=220, mode="determinate")
         progress_bar["value"] = progress_value
         progress_bar.pack(pady=5)
 
+    else:
+        progress_text = "Final stage reached 🌟"
 
-    progress_label.config(text=progress_text)
+        progress_label.config(text=progress_text)
 
     root.mainloop()

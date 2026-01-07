@@ -42,7 +42,9 @@ def simulate_session():
     print(explanation)
 
     # Show the nibble stage visualizer
+    next_stage = nibble.get_next_stage()
     show_nibble(nibble)
+
 
 if __name__ == "__main__":
     simulate_session()

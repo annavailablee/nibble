@@ -2,6 +2,13 @@
 from config import STAGE_THRESHOLD
 import json
 class Nibble: 
+    def get_next_stage(self):
+        if self.stage == "elder":
+           return None
+
+        current_index = self.STAGES.index(self.stage)
+        return self.STAGES[current_index + 1]
+    
     STAGES = ['baby', 'child', 'teen', 'adult', 'elder']
 
     def __init__(self, stage='baby', xp=0):
@@ -73,3 +80,12 @@ class Nibble:
             ), data.get('history', [])
         except FileNotFoundError:
             return cls(), []
+    
+    def get_stage_progress(self, stage_thresholds):
+        next_stage = self.get_next_stage()
+        if next_stage is None:
+            return None, None
+
+        current_threshold = stage_thresholds[self.stage]
+        next_threshold = stage_thresholds[next_stage]
+        return current_threshold, next_threshold
