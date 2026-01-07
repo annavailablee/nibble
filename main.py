@@ -4,7 +4,7 @@ from core.evaluator import Evaluator
 
 def simulate_session(): 
     #Create pet and evaluator
-    nibble = Nibble(stage='egg', xp=0)
+    nibble = Nibble(stage='baby', xp=0)
     evaluator = Evaluator()
     nibble, history = nibble.load_state()
     nibble.history = history

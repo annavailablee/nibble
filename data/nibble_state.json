@@ -5,8 +5,8 @@
         {
             "xp_gained": 26,
             "new_total_xp": 26,
-            "stage_before": "egg",
-            "stage_after": "baby",
+            "stage_before": "baby",
+            "stage_after": "child",
             "signals": {
                 "xp_gained": 26,
                 "fixed_error": true,

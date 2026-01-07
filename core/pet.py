@@ -2,9 +2,9 @@
 from config import STAGE_THRESHOLD
 import json
 class Nibble: 
-    STAGES = ['egg', 'baby', 'child', 'teen', 'adult', 'elder']
+    STAGES = ['baby', 'child', 'teen', 'adult', 'elder']
 
-    def __init__(self, stage='egg', xp=0):
+    def __init__(self, stage='baby', xp=0):
         if stage not in self.STAGES:
             raise ValueError(f"Invalid stage: {stage}. Must be one of {self.STAGES}.")
         self.stage = stage
@@ -68,7 +68,7 @@ class Nibble:
             with open(filepath, 'r') as f:
                 data = json.load(f)
             return cls( 
-                stage=data.get('stage', 'egg'),
+                stage=data.get('stage', 'baby'),
                 xp=data.get('xp', 0)
             ), data.get('history', [])
         except FileNotFoundError:
