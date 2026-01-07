@@ -1,5 +1,6 @@
 """Visual representation of Nibble's state"""
 
+from logging import root
 import tkinter as tk
 from tkinter import ttk
 from PIL import Image, ImageTk # type: ignore
@@ -10,6 +11,9 @@ def show_nibble(nibble, xp=0, next_xp=50):
     root = tk.Tk()
     root.title("Nibble 🐾")
     root.geometry("400x500")
+    
+    title = ttk.Label(root, text="Meet Nibble 🐾", font=("Segoe UI", 18, "bold"))
+    title.pack(pady=(10,5))
 
     image_frame = ttk.Frame(root)
     image_frame.pack(pady=10)
@@ -33,6 +37,15 @@ def show_nibble(nibble, xp=0, next_xp=50):
     progress_frame = tk.Frame(main_frame)
     progress_frame.pack(pady=5)
  
+    STAGE_COLORS = {
+        "egg": "#FFF7CC",
+        "baby": "#E8F7FF",
+        "child": "#E9FFE8",
+        "teen": "#F0E8FF",
+        "adult": "#FFE8EC",
+        "elder": "#EFEFEF"
+    }
+    root.configure(bg=STAGE_COLORS.get(nibble.stage, "#FFFFFF"))
 
     # image path based on stage
     img = Image.open(f"assets/{nibble.stage}.png")

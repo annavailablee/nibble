@@ -28,6 +28,12 @@ def simulate_session():
     #Apply signals to nibble
     nibble.apply_signals(signals)
 
+    old_stage = nibble.history[-1]["stage_before"]
+    new_stage = nibble.stage
+
+    if old_stage != new_stage:
+        print(f"✨ Nibble evolved into {new_stage.capitalize()}!")
+
     #Print nibble status
     print("\n 🐾Nibble Status After Session: ")
     status = nibble.status()
