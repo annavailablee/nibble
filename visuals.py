@@ -1,4 +1,5 @@
 """Visual representation of Nibble's state"""
+
 import tkinter as tk
 from tkinter import ttk
 from PIL import Image, ImageTk # type: ignore

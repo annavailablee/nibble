@@ -3,12 +3,12 @@
     "xp": 26,
     "history": [
         {
-            "xp_gained": 26,
-            "new_total_xp": 26,
-            "stage_before": "baby",
-            "stage_after": "child",
+            "xp_gained": 106,
+            "new_total_xp": 106,
+            "stage_before": "child",
+            "stage_after": "teen",
             "signals": {
-                "xp_gained": 26,
+                "xp_gained": 106,
                 "fixed_error": true,
                 "long_session": true
             }
