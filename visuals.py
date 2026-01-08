@@ -6,7 +6,7 @@ from tkinter import ttk
 from PIL import Image, ImageTk  # type: ignore
 from config import STAGE_THRESHOLD
 
-BG_COLOR = "#D6BAFA"
+BG_COLOR = "#FBD2F5"
 
 def show_nibble(nibble, notification=None):
     root = tk.Tk()
