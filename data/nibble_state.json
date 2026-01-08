@@ -1,140 +1,195 @@
 {
-    "stage": "elder",
-    "xp": 369,
+    "stage": "teen",
+    "xp": 119,
     "history": [
         {
-            "xp_gained": 106,
-            "new_total_xp": 106,
-            "stage_before": "child",
-            "stage_after": "teen",
+            "xp_gained": 7,
+            "new_total_xp": 7,
+            "stage_before": "baby",
+            "stage_after": "baby",
             "signals": {
-                "xp_gained": 106,
+                "xp_gained": 7,
                 "fixed_error": true,
                 "long_session": true
             }
         },
         {
-            "xp_gained": 26,
-            "new_total_xp": 65,
+            "xp_gained": 7,
+            "new_total_xp": 14,
+            "stage_before": "baby",
+            "stage_after": "baby",
+            "signals": {
+                "xp_gained": 7,
+                "fixed_error": true,
+                "long_session": true
+            }
+        },
+        {
+            "xp_gained": 7,
+            "new_total_xp": 21,
+            "stage_before": "baby",
+            "stage_after": "baby",
+            "signals": {
+                "xp_gained": 7,
+                "fixed_error": true,
+                "long_session": true
+            }
+        },
+        {
+            "xp_gained": 7,
+            "new_total_xp": 28,
+            "stage_before": "baby",
+            "stage_after": "baby",
+            "signals": {
+                "xp_gained": 7,
+                "fixed_error": true,
+                "long_session": true
+            }
+        },
+        {
+            "xp_gained": 7,
+            "new_total_xp": 35,
+            "stage_before": "baby",
+            "stage_after": "baby",
+            "signals": {
+                "xp_gained": 7,
+                "fixed_error": true,
+                "long_session": true
+            }
+        },
+        {
+            "xp_gained": 7,
+            "new_total_xp": 42,
+            "stage_before": "baby",
+            "stage_after": "baby",
+            "signals": {
+                "xp_gained": 7,
+                "fixed_error": true,
+                "long_session": true
+            }
+        },
+        {
+            "xp_gained": 7,
+            "new_total_xp": 49,
+            "stage_before": "baby",
+            "stage_after": "baby",
+            "signals": {
+                "xp_gained": 7,
+                "fixed_error": true,
+                "long_session": true
+            }
+        },
+        {
+            "xp_gained": 7,
+            "new_total_xp": 56,
             "stage_before": "baby",
             "stage_after": "child",
             "signals": {
-                "xp_gained": 26,
+                "xp_gained": 7,
                 "fixed_error": true,
                 "long_session": true
             }
         },
         {
-            "xp_gained": 26,
-            "new_total_xp": 92,
+            "xp_gained": 7,
+            "new_total_xp": 63,
             "stage_before": "child",
             "stage_after": "child",
             "signals": {
-                "xp_gained": 26,
+                "xp_gained": 7,
                 "fixed_error": true,
                 "long_session": true
             }
         },
         {
-            "xp_gained": 26,
-            "new_total_xp": 118,
+            "xp_gained": 7,
+            "new_total_xp": 70,
+            "stage_before": "child",
+            "stage_after": "child",
+            "signals": {
+                "xp_gained": 7,
+                "fixed_error": true,
+                "long_session": true
+            }
+        },
+        {
+            "xp_gained": 7,
+            "new_total_xp": 77,
+            "stage_before": "child",
+            "stage_after": "child",
+            "signals": {
+                "xp_gained": 7,
+                "fixed_error": true,
+                "long_session": true
+            }
+        },
+        {
+            "xp_gained": 7,
+            "new_total_xp": 84,
+            "stage_before": "child",
+            "stage_after": "child",
+            "signals": {
+                "xp_gained": 7,
+                "fixed_error": true,
+                "long_session": true
+            }
+        },
+        {
+            "xp_gained": 7,
+            "new_total_xp": 91,
+            "stage_before": "child",
+            "stage_after": "child",
+            "signals": {
+                "xp_gained": 7,
+                "fixed_error": true,
+                "long_session": true
+            }
+        },
+        {
+            "xp_gained": 7,
+            "new_total_xp": 98,
+            "stage_before": "child",
+            "stage_after": "child",
+            "signals": {
+                "xp_gained": 7,
+                "fixed_error": true,
+                "long_session": true
+            }
+        },
+        {
+            "xp_gained": 7,
+            "new_total_xp": 105,
             "stage_before": "child",
             "stage_after": "teen",
             "signals": {
-                "xp_gained": 26,
+                "xp_gained": 7,
                 "fixed_error": true,
                 "long_session": true
             }
         },
         {
-            "xp_gained": 26,
-            "new_total_xp": 145,
+            "xp_gained": 7,
+            "new_total_xp": 112,
             "stage_before": "teen",
             "stage_after": "teen",
             "signals": {
-                "xp_gained": 26,
+                "xp_gained": 7,
                 "fixed_error": true,
                 "long_session": true
             }
         },
         {
-            "xp_gained": 26,
-            "new_total_xp": 171,
+            "xp_gained": 7,
+            "new_total_xp": 119,
             "stage_before": "teen",
             "stage_after": "teen",
             "signals": {
-                "xp_gained": 26,
-                "fixed_error": true,
-                "long_session": true
-            }
-        },
-        {
-            "xp_gained": 26,
-            "new_total_xp": 197,
-            "stage_before": "teen",
-            "stage_after": "teen",
-            "signals": {
-                "xp_gained": 26,
-                "fixed_error": true,
-                "long_session": true
-            }
-        },
-        {
-            "xp_gained": 26,
-            "new_total_xp": 223,
-            "stage_before": "teen",
-            "stage_after": "teen",
-            "signals": {
-                "xp_gained": 26,
-                "fixed_error": true,
-                "long_session": true
-            }
-        },
-        {
-            "xp_gained": 26,
-            "new_total_xp": 249,
-            "stage_before": "teen",
-            "stage_after": "teen",
-            "signals": {
-                "xp_gained": 26,
-                "fixed_error": true,
-                "long_session": true
-            }
-        },
-        {
-            "xp_gained": 26,
-            "new_total_xp": 275,
-            "stage_before": "teen",
-            "stage_after": "adult",
-            "signals": {
-                "xp_gained": 26,
-                "fixed_error": true,
-                "long_session": true
-            }
-        },
-        {
-            "xp_gained": 26,
-            "new_total_xp": 301,
-            "stage_before": "adult",
-            "stage_after": "adult",
-            "signals": {
-                "xp_gained": 26,
-                "fixed_error": true,
-                "long_session": true
-            }
-        },
-        {
-            "xp_gained": 26,
-            "new_total_xp": 327,
-            "stage_before": "adult",
-            "stage_after": "adult",
-            "signals": {
-                "xp_gained": 26,
+                "xp_gained": 7,
                 "fixed_error": true,
                 "long_session": true
             }
         }
     ],
-    "last_active": 1767809187.9127872,
+    "last_active": 1767880253.7271667,
     "had_activity": false
 }

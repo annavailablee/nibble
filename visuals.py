@@ -2,113 +2,92 @@
 
 import tkinter as tk
 from tkinter import ttk
-from PIL import Image, ImageTk # type: ignore
-import os
+from PIL import Image, ImageTk  # type: ignore
 from config import STAGE_THRESHOLD
+
+BG_COLOR = "#D6BAFA" 
 
 def show_nibble(nibble, notification=None):
     root = tk.Tk()
     root.title("Nibble 🐾")
+    root.configure(bg=BG_COLOR)
 
+    # notification
     if notification:
-        notif_label = tk.Label(root, text=notification, font=("Arial", 11, "italic"), fg="#4CAF50")
-        notif_label.pack(pady=5)
+        tk.Label(root, text=notification, font=("Arial", 11, "italic"), fg="#2E7D32", bg=BG_COLOR).pack(pady=5)
 
+    # title
+    tk.Label(root, text="Meet Nibble 🐾", font=("Segoe UI", 18, "bold"), bg=BG_COLOR).pack(pady=(10, 5))
 
-    title = ttk.Label(root, text="Meet Nibble 🐾", font=("Segoe UI", 18, "bold"))
-    title.pack(pady=(10,5))
+    # main container
+    main_frame = tk.Frame(root, bg=BG_COLOR)
+    main_frame.pack(fill="both", expand=True)
 
-    main_frame = tk.Frame(root)
-    main_frame.pack(fill="both", expand=True, padx=5, pady=5)
-
-    image_frame = tk.Frame(main_frame)
+    # image
+    image_frame = tk.Frame(main_frame, bg=BG_COLOR)
     image_frame.pack(pady=5)
 
-    stats_frame = tk.Frame(main_frame)
-    stats_frame.pack(pady=5)
-
-    progress_frame = tk.Frame(main_frame)
-    progress_frame.pack(pady=5)
-
-    pet_frame = tk.Frame(main_frame)
-    pet_frame.pack(pady=5)
-
-    stats_frame = tk.Frame(main_frame)
-    stats_frame.pack(pady=5)
-
-    progress_frame = tk.Frame(main_frame)
-    progress_frame.pack(pady=5)
- 
-    STAGE_COLORS = {
-        "egg": "#FFF7CC",
-        "baby": "#E8F7FF",
-        "child": "#E9FFE8",
-        "teen": "#F0E8FF",
-        "adult": "#FFE8EC",
-        "elder": "#EFEFEF"
-    }
-
-    root.configure(bg=STAGE_COLORS.get(nibble.stage, "#FFFFFF"))
-
-    # image path based on stage
     img = Image.open(f"assets/{nibble.stage}.png")
     img = img.resize((200, 200), Image.Resampling.LANCZOS)
     photo = ImageTk.PhotoImage(img)
 
-    img_label = ttk.Label(image_frame, image=photo)
+    img_label = tk.Label(image_frame, image=photo, bg=BG_COLOR)
     img_label.image = photo
     img_label.pack()
 
     # stats
-    """stage_label = tk.Label(stats_frame, text=f"Stage: {nibble.stage.capitalize()}", font=("Arial", 16, "bold"))
-    stage_label.pack(pady=10)
+    stats_frame = tk.Frame(main_frame, bg=BG_COLOR)
+    stats_frame.pack(pady=5)
 
-    xp_label = tk.Label(stats_frame, text=f"XP: {nibble.xp}", font=("Arial", 14))
-    xp_label.pack(pady=5)"""
+    tk.Label(stats_frame, text=f"Stage: {nibble.stage.capitalize()}", font=("Segoe UI", 14), bg=BG_COLOR).pack()
+    tk.Label(stats_frame, text=f"XP: {nibble.xp}", font=("Segoe UI", 12), bg=BG_COLOR).pack()
 
-    ttk.Label(stats_frame, text=f"Stage: {nibble.stage}", font=("Segoe UI", 14)).pack()
-    ttk.Label(stats_frame, text=f"XP: {nibble.xp}", font=("Segoe UI", 12)).pack()
+    #stage message
+    message = nibble.get_stage_message()
+    tk.Label(main_frame, text=message, font=("Arial", 11, "italic"), fg="#444", bg=BG_COLOR).pack(pady=5)
 
-
+    # XP needed for next stage
     if nibble.stage != "elder":
         stages = list(STAGE_THRESHOLD.keys())
         next_stage = stages[stages.index(nibble.stage) + 1]
         xp_needed = STAGE_THRESHOLD[next_stage] - nibble.xp
-        next_label = tk.Label(root, text=f" {xp_needed} XP needed for next stage {next_stage.capitalize()}", font=("Arial", 12))
-        next_label.pack(pady=5)
+
+        tk.Label(main_frame, text=f"{xp_needed} XP needed for next stage {next_stage.capitalize()}", font=("Arial", 12), bg=BG_COLOR).pack(pady=5)
     else:
-        final_label = tk.Label(root, text="Nibble has reached the final stage!", font=("Arial", 12))
-        final_label.pack(pady=5)
+        tk.Label(main_frame, text="Nibble has reached the final stage!", font=("Arial", 12), bg=BG_COLOR).pack(pady=5)
 
-    history_label = tk.Label(root, text=f"Sessions logged: {len(nibble.history)}", font=("Arial", 12))
-    history_label.pack(pady=10)
-    # Progress bar
-    progress_label = tk.Label(progress_frame, text="Progress loading...", font=("Arial", 11), fg="gray")
-    progress_label.pack()
+    #history
+    tk.Label(main_frame, text=f"Sessions logged: {len(nibble.history)}", font=("Arial", 12), bg=BG_COLOR).pack(pady=8)
 
+    #progress bar
+    progress_frame = tk.Frame(main_frame, bg=BG_COLOR)
+    progress_frame.pack(pady=5)
 
     if nibble.stage != "elder":
-        stages = list(STAGE_THRESHOLD.keys())
         current_stage = nibble.stage
+        stages = list(STAGE_THRESHOLD.keys())
         next_stage = stages[stages.index(current_stage) + 1]
 
         current_xp = nibble.xp
         current_threshold = STAGE_THRESHOLD[current_stage]
         next_threshold = STAGE_THRESHOLD[next_stage]
 
-        xp_needed = max(0, next_threshold - current_xp)
-        progress_text = f"{xp_needed} XP to reach {next_stage.capitalize()}"
-        # Progress within this stage (0–100)
-        progress_value = (current_xp - current_threshold) / (next_threshold - current_threshold)
+        progress_value = ((current_xp - current_threshold) / (next_threshold - current_threshold))
         progress_value = max(0, min(progress_value, 1)) * 100
 
-        progress_bar = ttk.Progressbar(progress_frame, orient="horizontal", length=220, mode="determinate")
-        progress_bar["value"] = progress_value
-        progress_bar.pack(pady=5)
+        style = ttk.Style()
+        style.theme_use("default")
+        style.configure("Nibble.Horizontal.TProgressbar", troughcolor=BG_COLOR, background="#381270")
 
+        ttk.Progressbar( progress_frame, style="Nibble.Horizontal.TProgressbar", orient="horizontal", length=220, mode="determinate", value=progress_value).pack()
     else:
-        progress_text = "Final stage reached 🌟"
-
-        progress_label.config(text=progress_text)
+        tk.Label(progress_frame, text="Final stage reached 🌟", font=("Arial", 11), bg=BG_COLOR).pack()
 
     root.mainloop()
+    STAGE_COLORS = {
+        "baby": "#FFD700",
+        "child": "#FFB14E",
+        "teen": "#FF7F50",
+        "adult": "#6A5ACD",
+        "elder": "#A2DFFF"
+    }

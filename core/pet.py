@@ -71,6 +71,16 @@ class Nibble:
         with open(filepath, 'w') as f:
             json.dump(data, f, indent=4) 
     
+    def get_stage_message(self):
+        messages = {
+            "baby": "Nibble is curious and learning every day 🐣",
+            "child": "Nibble is playful and full of energy 🐾",
+            "teen": "Nibble is figuring things out and testing limits 😼",
+            "adult": "Nibble is confident and focused 💼🐕",
+            "elder": "Nibble is wise and content 🌟"
+        }
+        return messages.get(self.stage, "")
+
     @classmethod
     def load_state(cls, filepath="data/nibble_state.json"):
         try:

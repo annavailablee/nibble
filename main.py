@@ -5,6 +5,8 @@ from visuals import show_nibble
 from core.pet import Nibble
 import time
 signals = {}
+DEV_MODE = True
+
 def simulate_session(): 
     #Create pet and evaluator
     evaluator = Evaluator()
@@ -14,10 +16,13 @@ def simulate_session():
 
     can_gain_xp = True
 
-    if hasattr(nibble, "last_active") and nibble.last_active:
+    if not DEV_MODE and hasattr(nibble, "last_active") and nibble.last_active:
         time_since_last = time.time() - nibble.last_active
         if time_since_last < MIN_SESSION_GAP:
             can_gain_xp = False
+
+    if DEV_MODE:
+        print("🧪 DEV MODE ENABLED")
 
     BONUS_XP = 1    
     RETURN_THRESHOLD = 60 * 60 * 6  # 6 hours
