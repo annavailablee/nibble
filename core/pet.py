@@ -2,6 +2,7 @@
 import time
 from config import STAGE_THRESHOLD
 import json
+
 class Nibble: 
     def get_next_stage(self):
         if self.stage == "elder":
@@ -40,6 +41,16 @@ class Nibble:
             'stage_after': self.stage,
             'signals': signals
         })
+        STAGE_XP_MODIFIER = {
+            "baby": 1.0,
+            "child": 0.6,
+            "teen": 0.4,
+            "adult": 0.25,
+            "elder": 0.0
+        }   
+        xp = int(signals.get("xp_gained", 0) * STAGE_XP_MODIFIER[self.stage])
+        self.xp += xp
+
 
     def status(self) -> dict: 
         """return nibble's current status"""
@@ -62,10 +73,11 @@ class Nibble:
     def save_state(self, filepath= "data/nibble_state.json"):
         """save nibble's state to a file"""
         data = {
-            'stage': self.stage,
-            'xp': self.xp,
-            'history': self.history,
+            "stage": self.stage,
+            "xp": self.xp,
+            "history": self.history,
             "last_active": time.time(),
+            "last_xp_time": time.time(),
             "had_activity": False
         }
         with open(filepath, 'w') as f:
@@ -92,7 +104,7 @@ class Nibble:
                 xp=data.get('xp', 0)
             )
             nibble.history = data.get('history', [])
-            nibble.last_active = data.get("last_active", None)
+            nibble.last_xp_time = data.get("last_xp_time", 0)
             return nibble, nibble.history
 
         except FileNotFoundError:

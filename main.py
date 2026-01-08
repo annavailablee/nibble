@@ -1,4 +1,5 @@
 """entry point for the application"""
+from core import evaluator
 from core.pet import Nibble
 from core.evaluator import Evaluator
 from visuals import show_nibble
@@ -6,6 +7,13 @@ from core.pet import Nibble
 import time
 signals = {}
 DEV_MODE = True
+
+if DEV_MODE:
+    XP_COOLDOWN = 2
+    XP_MULTIPLIER = 1.0
+else:
+    XP_COOLDOWN = 600
+    XP_MULTIPLIER = 0.25
 
 def simulate_session(): 
     #Create pet and evaluator
@@ -79,6 +87,18 @@ def simulate_session():
     next_stage = nibble.get_next_stage()
     show_nibble(nibble, notification=notification)
 
+    #cooldown
+    XP_COOLDOWN = 60 * 10  # 10 minutes
+    now = time.time()
+
+    signals = None
+
+    if now - getattr(nibble, "last_xp_time", 0) < XP_COOLDOWN:
+        print("⏳ Session too short. No XP gained.")
+    else:
+        signals = evaluator.evaluate(session_metrics)
+        nibble.apply_signals(signals)
+        nibble.last_xp_time = now
     nibble.save_state()
 if __name__ == "__main__":
     simulate_session()

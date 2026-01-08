@@ -84,10 +84,3 @@ def show_nibble(nibble, notification=None):
         tk.Label(progress_frame, text="Final stage reached 🌟", font=("Arial", 11), bg=BG_COLOR).pack()
 
     root.mainloop()
-    STAGE_COLORS = {
-        "baby": "#FFD700",
-        "child": "#FFB14E",
-        "teen": "#FF7F50",
-        "adult": "#6A5ACD",
-        "elder": "#A2DFFF"
-    }

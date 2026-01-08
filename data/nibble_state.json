@@ -1,6 +1,6 @@
 {
     "stage": "teen",
-    "xp": 119,
+    "xp": 155,
     "history": [
         {
             "xp_gained": 7,
@@ -188,8 +188,53 @@
                 "fixed_error": true,
                 "long_session": true
             }
+        },
+        {
+            "xp_gained": 7,
+            "new_total_xp": 126,
+            "stage_before": "teen",
+            "stage_after": "teen",
+            "signals": {
+                "xp_gained": 7,
+                "fixed_error": true,
+                "long_session": true
+            }
+        },
+        {
+            "xp_gained": 7,
+            "new_total_xp": 135,
+            "stage_before": "teen",
+            "stage_after": "teen",
+            "signals": {
+                "xp_gained": 7,
+                "fixed_error": true,
+                "long_session": true
+            }
+        },
+        {
+            "xp_gained": 7,
+            "new_total_xp": 144,
+            "stage_before": "teen",
+            "stage_after": "teen",
+            "signals": {
+                "xp_gained": 7,
+                "fixed_error": true,
+                "long_session": true
+            }
+        },
+        {
+            "xp_gained": 7,
+            "new_total_xp": 153,
+            "stage_before": "teen",
+            "stage_after": "teen",
+            "signals": {
+                "xp_gained": 7,
+                "fixed_error": true,
+                "long_session": true
+            }
         }
     ],
-    "last_active": 1767880253.7271667,
+    "last_active": 1767881003.2815294,
+    "last_xp_time": 1767881003.28153,
     "had_activity": false
 }
