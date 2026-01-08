@@ -9,8 +9,8 @@ signals = {}
 DEV_MODE = True
 
 if DEV_MODE:
-    XP_COOLDOWN = 2
-    XP_MULTIPLIER = 1.0
+    XP_COOLDOWN = 0
+    XP_MULTIPLIER = 150.0
 else:
     XP_COOLDOWN = 600
     XP_MULTIPLIER = 0.25
@@ -32,8 +32,8 @@ def simulate_session():
     if DEV_MODE:
         print("🧪 DEV MODE ENABLED")
 
-    BONUS_XP = 1    
-    RETURN_THRESHOLD = 60 * 60 * 6  # 6 hours
+    BONUS_XP = 55    
+    RETURN_THRESHOLD = 1  # 6 hours
 
     notification = None
 
