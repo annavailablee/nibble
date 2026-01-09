@@ -20,37 +20,39 @@ It evolves through life stages based on your coding activity, rewarding consiste
 ----
 ## Overview
 
-Nibble is a digital companion for programmers that evolves as you code.
+Nibble is a virtual desktop pet designed for developers.
 
-Instead of streak pressure or productivity guilt, Nibble focuses on gentle progression.
-The more consistently you work, the more Nibble grows.
+Instead of growing through idle time, Nibble evolves based on coding activity and sessions.
+The idea is simple: show up, work, improve and your pet grows with you.
 
-Each stage visually reflects progress through:
-- XP-based evolution
-- Stage-specific accessories
-- Persistent session tracking
+Nibble lives quietly in your system tray and pops up when you want to check in.
 
 ---
 
 ## Features
 
-- XP-driven growth system (no idle grinding)
-- Five life stages: baby → child → teen → adult → elder
-- Stage-based visual accessories layered on the pet
-- Persistent local state using JSON
-- Return bonus for coming back after inactivity
-- Clean Tkinter UI with progress bar and notifications
-- Developer-friendly reset and testing support
+- XP-based pet evolution
+- Five growth stages: Baby → Child → Teen → Adult → Elder
+- Persistent save/load system
+- Visual pet window using Tkinter
+- Pixel-style accessories per stage
+- System tray integration
+- Soft sound cues (launch, XP gain, evolution, return bonus)
+- Developer mode for rapid testing
 
 ---
 ## Tech Stack
 
-| Category | Tools   |
-| -------- | ------- |
-| Language | Python  |
-| UI       | Tkinter |
-| Imaging  | Pillow  |
-| Storage  | JSON    |
+
+| Category       | Tools        |
+| -------------- | ------------ |
+| Language       | Python       |
+| UI             | Tkinter      |
+| Images         | Pillow (PIL) |
+| Audio          | WAV playback |
+| Storage        | JSON         |
+| OS Integration | System Tray  |
+
 ---
 
 ## Acknowledgement 
