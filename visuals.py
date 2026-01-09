@@ -6,7 +6,7 @@ from tkinter import ttk
 from PIL import Image, ImageTk  # type: ignore
 from config import STAGE_THRESHOLD
 
-BG_COLOR = "#FBD2F5"
+BG_COLOR = "#FAE7F7"
 
 def show_nibble(nibble, notification=None):
     root = tk.Tk()
@@ -134,7 +134,7 @@ def show_nibble(nibble, notification=None):
         style.configure(
             "Nibble.Horizontal.TProgressbar",
             troughcolor=BG_COLOR,
-            background="#381270"
+            background="#FF54CC"
         )
 
         ttk.Progressbar(
