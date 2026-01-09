@@ -4,7 +4,7 @@ import time
 from core.pet import Nibble
 from core.evaluator import Evaluator
 from visuals import show_nibble
-
+from core.sound import play
 
 DEV_MODE = True
 
@@ -19,7 +19,7 @@ else:
     RETURN_THRESHOLD = 6 * 60 * 60  # 6 hours
     BONUS_XP = 1
 
-
+play("launch")
 
 def simulate_session():
     evaluator = Evaluator()
@@ -37,6 +37,8 @@ def simulate_session():
     if last_active and now - last_active > RETURN_THRESHOLD:
         nibble.xp += BONUS_XP
         notification = f"🐾 Welcome back! Nibble gained +{BONUS_XP} XP"
+        play("return")
+
 
     last_xp_time = getattr(nibble, "last_xp_time", 0)
     can_gain_xp = DEV_MODE or (now - last_xp_time >= XP_COOLDOWN)
@@ -56,6 +58,9 @@ def simulate_session():
         signals = evaluator.evaluate(session_metrics)
         signals["xp_gained"] = int(signals.get("xp_gained", 0) * XP_MULTIPLIER)
         nibble.apply_signals(signals)
+        if signals.get("xp_gained", 0) > 0:
+            play("xp")
+
         nibble.last_xp_time = now
     else:
         print("⏳ Session too short. No XP gained.")
@@ -64,7 +69,7 @@ def simulate_session():
 
     if stage_before != stage_after:
         print(f"✨ Nibble evolved into {stage_after.capitalize()}!")
-
+        play("evolve")
     nibble.last_active = now
     nibble.save_state()
 
