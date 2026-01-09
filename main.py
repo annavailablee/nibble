@@ -5,6 +5,9 @@ from core.pet import Nibble
 from core.evaluator import Evaluator
 from visuals import show_nibble
 from core.sound import play
+from core.tray import start_tray
+from core.notify import notify
+
 
 DEV_MODE = True
 
@@ -59,6 +62,7 @@ def simulate_session():
         signals["xp_gained"] = int(signals.get("xp_gained", 0) * XP_MULTIPLIER)
         nibble.apply_signals(signals)
         if signals.get("xp_gained", 0) > 0:
+            notify("XP Gained 🌱", f"+{signals['xp_gained']} XP earned")
             play("xp")
 
         nibble.last_xp_time = now
@@ -68,7 +72,7 @@ def simulate_session():
     stage_after = nibble.stage
 
     if stage_before != stage_after:
-        print(f"✨ Nibble evolved into {stage_after.capitalize()}!")
+        notify("Nibble evolved! ✨",f"Nibble evolved into {stage_after.capitalize()}!")
         play("evolve")
     nibble.last_active = now
     nibble.save_state()
@@ -85,6 +89,8 @@ def simulate_session():
 
     show_nibble(nibble, notification=notification)
 
-
 if __name__ == "__main__":
-    simulate_session()
+    nibble, history = Nibble.load_state()
+    nibble.history = history
+
+    start_tray(nibble)

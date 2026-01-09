@@ -1,6 +1,6 @@
 {
     "stage": "teen",
-    "xp": 163,
+    "xp": 220,
     "history": [
         {
             "xp_gained": 10,
@@ -81,9 +81,39 @@
                 "xp_gained": 10,
                 "reason": "session_completed"
             }
+        },
+        {
+            "xp_gained": 10,
+            "new_total_xp": 178,
+            "stage_before": "teen",
+            "stage_after": "teen",
+            "signals": {
+                "xp_gained": 10,
+                "reason": "session_completed"
+            }
+        },
+        {
+            "xp_gained": 10,
+            "new_total_xp": 197,
+            "stage_before": "teen",
+            "stage_after": "teen",
+            "signals": {
+                "xp_gained": 10,
+                "reason": "session_completed"
+            }
+        },
+        {
+            "xp_gained": 10,
+            "new_total_xp": 216,
+            "stage_before": "teen",
+            "stage_after": "teen",
+            "signals": {
+                "xp_gained": 10,
+                "reason": "session_completed"
+            }
         }
     ],
-    "last_active": 1767984507.5259361,
+    "last_active": 1767988836.1241941,
     "last_session_time": null,
     "dev_mode": true
 }
