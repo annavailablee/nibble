@@ -1,64 +1,19 @@
 {
-    "stage": "child",
-    "xp": 67,
+    "stage": "baby",
+    "xp": 20,
     "history": [
         {
-            "xp_gained": 7,
-            "new_total_xp": 7,
+            "xp_gained": 10,
+            "new_total_xp": 10,
             "stage_before": "baby",
             "stage_after": "baby",
             "signals": {
-                "xp_gained": 7,
-                "fixed_error": true,
-                "long_session": true
-            }
-        },
-        {
-            "xp_gained": 7,
-            "new_total_xp": 21,
-            "stage_before": "baby",
-            "stage_after": "baby",
-            "signals": {
-                "xp_gained": 7,
-                "fixed_error": true,
-                "long_session": true
-            }
-        },
-        {
-            "xp_gained": 7,
-            "new_total_xp": 35,
-            "stage_before": "baby",
-            "stage_after": "baby",
-            "signals": {
-                "xp_gained": 7,
-                "fixed_error": true,
-                "long_session": true
-            }
-        },
-        {
-            "xp_gained": 7,
-            "new_total_xp": 49,
-            "stage_before": "baby",
-            "stage_after": "baby",
-            "signals": {
-                "xp_gained": 7,
-                "fixed_error": true,
-                "long_session": true
-            }
-        },
-        {
-            "xp_gained": 7,
-            "new_total_xp": 63,
-            "stage_before": "baby",
-            "stage_after": "child",
-            "signals": {
-                "xp_gained": 7,
-                "fixed_error": true,
-                "long_session": true
+                "xp_gained": 10,
+                "reason": "session_completed"
             }
         }
     ],
-    "last_active": 1767941425.8920884,
-    "last_xp_time": 1767941425.8920887,
-    "had_activity": false
+    "last_active": 1767971580.4895267,
+    "last_session_time": null,
+    "dev_mode": true
 }

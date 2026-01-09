@@ -13,12 +13,14 @@ class Nibble:
     
     STAGES = ['baby', 'child', 'teen', 'adult', 'elder']
 
-    def __init__(self, stage='baby', xp=0):
+    def __init__(self, stage='baby', xp=0, dev_mode=False):
         if stage not in self.STAGES:
             raise ValueError(f"Invalid stage: {stage}. Must be one of {self.STAGES}.")
         self.stage = stage
         self.xp = xp
         self.history = []
+        self.dev_mode = dev_mode
+        self.last_session_time = None
     
     def update_stage(self):
         for stage, threshold in STAGE_THRESHOLD.items():
@@ -77,9 +79,10 @@ class Nibble:
             "xp": self.xp,
             "history": self.history,
             "last_active": time.time(),
-            "last_xp_time": time.time(),
-            "had_activity": False
+            "last_session_time": self.last_session_time,
+            "dev_mode": self.dev_mode
         }
+
         with open(filepath, 'w') as f:
             json.dump(data, f, indent=4) 
     
@@ -96,24 +99,29 @@ class Nibble:
     @classmethod
     def load_state(cls, filepath="data/nibble_state.json"):
         try:
-            with open(filepath, 'r') as f:
+            with open(filepath, "r") as f:
                 data = json.load(f)
 
             nibble = cls(
-                stage=data.get('stage', 'baby'),
-                xp=data.get('xp', 0)
+                stage=data.get("stage", "baby"),
+                xp=data.get("xp", 0),
+                dev_mode=data.get("dev_mode", False)
             )
-            nibble.history = data.get('history', [])
-            nibble.last_xp_time = data.get("last_xp_time", 0)
+            nibble.history = data.get("history", [])
+            nibble.last_active = data.get("last_active", None)
+            nibble.last_session_time = data.get("last_session_time", None)
+
             return nibble, nibble.history
 
         except FileNotFoundError:
             print("DEBUG: No saved state found. Creating new Nibble.")
-            return cls(), []
+            nibble = cls()
+            return nibble, []
 
         except Exception as e:
             print("DEBUG: Failed to load state:", e)
-            return cls(), []
+            nibble = cls()
+            return nibble, []
 
     def get_stage_progress(self, stage_thresholds):
         next_stage = self.get_next_stage()

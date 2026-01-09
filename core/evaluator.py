@@ -7,7 +7,7 @@ from config import (
 )
 
 class Evaluator:
-
+    MAX_XP = 20
     def evaluate(self, metrics: dict) -> dict:
         """
         Input: 
@@ -26,7 +26,21 @@ class Evaluator:
                 "long_session": bool
                 }
         """
+        xp = 5  # base XP
 
+        if metrics.get("fixed_error"):
+            xp += 5
+        if metrics.get("long_session"):
+            xp += 5
+        if metrics.get("reflections_done"):
+            xp += 5
+
+        xp = min(xp, self.MAX_XP)
+
+        return {
+            "xp_gained": xp,
+            "reason": "session_completed"}
+    
         signals={
             "xp_gained": 0,
             "fixed_error": False,
